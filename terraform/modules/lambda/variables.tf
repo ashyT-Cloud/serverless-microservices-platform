@@ -28,3 +28,13 @@ variable "dynamodb_environment_variable" {
   type    = string
   default = "USERS_TABLE"
 }
+
+variable "event_bus_arn" {
+  type    = string
+  default = ""
+}
+
+variable "event_bus_name" {
+  type    = string
+  default = ""
+}

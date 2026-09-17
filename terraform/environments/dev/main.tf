@@ -33,6 +33,8 @@ module "workout_service" {
   dynamodb_table_name           = aws_dynamodb_table.workouts.name
   dynamodb_table_arn            = aws_dynamodb_table.workouts.arn
   dynamodb_environment_variable = "WORKOUTS_TABLE"
+  event_bus_arn                 = aws_cloudwatch_event_bus.main.arn
+  event_bus_name                = aws_cloudwatch_event_bus.main.name
 }
 
 module "workout_api" {

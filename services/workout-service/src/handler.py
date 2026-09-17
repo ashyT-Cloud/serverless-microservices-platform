@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 import boto3
 
 dynamodb = boto3.resource("dynamodb")
+eventbridge = boto3.client("events")
+event_bus_name = os.environ["EVENT_BUS_NAME"]
 table = dynamodb.Table(os.environ["WORKOUTS_TABLE"])
 
 
@@ -56,6 +58,16 @@ def lambda_handler(event, context):
         }
 
         table.put_item(Item=workout)
+        eventbridge.put_events(
+            Entries=[
+                {
+                    "EventBusName": event_bus_name,
+                    "Source": "fittrack.workout-service",
+                    "DetailType": "WorkoutCreated",
+                    "Detail": json.dumps(workout)
+                }
+            ]
+        )
 
         return response(201, workout)
 
