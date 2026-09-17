@@ -65,7 +65,7 @@ resource "aws_lambda_function" "this" {
 
   environment {
     variables = {
-      USERS_TABLE = var.dynamodb_table_name
+      (var.dynamodb_environment_variable) = var.dynamodb_table_name
     }
   }
 }

@@ -23,3 +23,8 @@ variable "dynamodb_table_arn" {
   type    = string
   default = ""
 }
+
+variable "dynamodb_environment_variable" {
+  type    = string
+  default = "USERS_TABLE"
+}
