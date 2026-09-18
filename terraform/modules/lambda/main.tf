@@ -30,6 +30,8 @@ resource "aws_iam_role_policy_attachment" "basic_execution" {
 }
 
 resource "aws_iam_role_policy" "dynamodb" {
+  count = var.dynamodb_table_arn != "" ? 1 : 0
+
   name = "${var.function_name}-dynamodb"
   role = aws_iam_role.lambda.id
 

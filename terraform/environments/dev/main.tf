@@ -66,3 +66,16 @@ module "analytics_service" {
     IDEMPOTENCY_TABLE = aws_dynamodb_table.analytics_processed_events.name
   }
 }
+
+module "notification_service" {
+  source = "../../modules/lambda"
+
+  function_name = "${var.project_name}-${var.environment}-notification-service"
+  handler       = "handler.lambda_handler"
+  runtime       = "python3.12"
+  source_dir    = "../../../services/notification-service/src"
+
+  environment_variables = {
+    NOTIFICATION_QUEUE_URL = aws_sqs_queue.notification.url
+  }
+}
