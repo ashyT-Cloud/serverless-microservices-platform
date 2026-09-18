@@ -50,3 +50,15 @@ module "workout_api" {
     "GET /workouts/{workoutId}"
   ]
 }
+
+module "analytics_service" {
+  source = "../../modules/lambda"
+
+  function_name                 = "${var.project_name}-${var.environment}-analytics-service"
+  handler                       = "handler.lambda_handler"
+  runtime                       = "python3.12"
+  source_dir                    = "../../../services/analytics-service/src"
+  dynamodb_table_name           = aws_dynamodb_table.analytics.name
+  dynamodb_table_arn            = aws_dynamodb_table.analytics.arn
+  dynamodb_environment_variable = "ANALYTICS_TABLE"
+}
