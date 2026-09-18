@@ -12,7 +12,7 @@ on:
       - develop
       - main
 
-permission:
+permissions:
     id-token: write
     contents: read
 
