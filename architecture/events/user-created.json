@@ -1,0 +1,11 @@
+{
+  "eventType": "UserCreated",
+  "version": "1.0",
+  "source": "fittrack.user-service",
+  "detail": {
+    "userId": "uuid",
+    "name": "Example User",
+    "email": "user@example.com",
+    "createdAt": "2026-09-17T10:00:00Z"
+  }
+}
