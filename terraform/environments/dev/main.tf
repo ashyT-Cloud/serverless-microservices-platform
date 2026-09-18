@@ -61,4 +61,8 @@ module "analytics_service" {
   dynamodb_table_name           = aws_dynamodb_table.analytics.name
   dynamodb_table_arn            = aws_dynamodb_table.analytics.arn
   dynamodb_environment_variable = "ANALYTICS_TABLE"
+
+  environment_variables = {
+    IDEMPOTENCY_TABLE = aws_dynamodb_table.analytics_processed_events.name
+  }
 }

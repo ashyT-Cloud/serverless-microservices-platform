@@ -88,9 +88,13 @@ resource "aws_lambda_function" "this" {
   timeout = 10
 
   environment {
-    variables = {
-      (var.dynamodb_environment_variable) = var.dynamodb_table_name
-      EVENT_BUS_NAME                      = var.event_bus_name
-    }
+    variables = merge(
+      {
+        (var.dynamodb_environment_variable) = var.dynamodb_table_name
+        EVENT_BUS_NAME                      = var.event_bus_name
+      },
+      var.environment_variables
+    )
   }
 }
+

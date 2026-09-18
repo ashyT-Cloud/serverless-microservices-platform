@@ -38,3 +38,8 @@ variable "event_bus_name" {
   type    = string
   default = ""
 }
+
+variable "environment_variables" {
+  type    = map(string)
+  default = {}
+}
