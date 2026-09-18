@@ -1,0 +1,12 @@
+{
+  "eventType": "WorkoutCreated",
+  "version": "1.0",
+  "source": "fittrack.workout-service",
+  "detail": {
+    "workoutId": "uuid",
+    "userId": "uuid",
+    "workoutType": "strength",
+    "durationMinutes": 45,
+    "createdAt": "2026-09-17T10:00:00Z"
+  }
+}
