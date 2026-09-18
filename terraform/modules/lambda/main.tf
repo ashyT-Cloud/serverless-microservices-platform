@@ -30,7 +30,7 @@ resource "aws_iam_role_policy_attachment" "basic_execution" {
 }
 
 resource "aws_iam_role_policy" "dynamodb" {
-  count = var.dynamodb_table_arn != "" ? 1 : 0
+  count = var.enable_dynamodb_policy ? 1 : 0
 
   name = "${var.function_name}-dynamodb"
   role = aws_iam_role.lambda.id
@@ -55,7 +55,7 @@ resource "aws_iam_role_policy" "dynamodb" {
 }
 
 resource "aws_iam_role_policy" "eventbridge" {
-  count = var.event_bus_arn != "" ? 1 : 0
+  count = var.enable_eventbridge_policy ? 1 : 0
 
   name = "${var.function_name}-eventbridge"
   role = aws_iam_role.lambda.id

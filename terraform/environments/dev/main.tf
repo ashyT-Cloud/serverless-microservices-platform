@@ -1,12 +1,13 @@
 module "user_service" {
   source = "../../modules/lambda"
 
-  function_name       = "${var.project_name}-${var.environment}-user-service"
-  handler             = "handler.lambda_handler"
-  runtime             = "python3.12"
-  source_dir          = "../../../services/user-service/src"
-  dynamodb_table_name = aws_dynamodb_table.users.name
-  dynamodb_table_arn  = aws_dynamodb_table.users.arn
+  function_name          = "${var.project_name}-${var.environment}-user-service"
+  handler                = "handler.lambda_handler"
+  runtime                = "python3.12"
+  source_dir             = "../../../services/user-service/src"
+  dynamodb_table_name    = aws_dynamodb_table.users.name
+  dynamodb_table_arn     = aws_dynamodb_table.users.arn
+  enable_dynamodb_policy = true
 }
 
 module "user_api" {
@@ -35,6 +36,8 @@ module "workout_service" {
   dynamodb_environment_variable = "WORKOUTS_TABLE"
   event_bus_arn                 = aws_cloudwatch_event_bus.main.arn
   event_bus_name                = aws_cloudwatch_event_bus.main.name
+  enable_dynamodb_policy        = true
+  enable_eventbridge_policy     = true
 }
 
 module "workout_api" {
@@ -61,6 +64,7 @@ module "analytics_service" {
   dynamodb_table_name           = aws_dynamodb_table.analytics.name
   dynamodb_table_arn            = aws_dynamodb_table.analytics.arn
   dynamodb_environment_variable = "ANALYTICS_TABLE"
+  enable_dynamodb_policy        = true
 
   environment_variables = {
     IDEMPOTENCY_TABLE = aws_dynamodb_table.analytics_processed_events.name

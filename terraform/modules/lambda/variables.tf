@@ -43,3 +43,15 @@ variable "environment_variables" {
   type    = map(string)
   default = {}
 }
+
+variable "enable_dynamodb_policy" {
+  description = "Whether to attach DynamoDB permissions to the Lambda role"
+  type        = bool
+  default     = false
+}
+
+variable "enable_eventbridge_policy" {
+  description = "Whether to attach EventBridge permissions to the Lambda role"
+  type        = bool
+  default     = false
+}
